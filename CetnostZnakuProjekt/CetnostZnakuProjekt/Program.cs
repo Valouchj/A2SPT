@@ -13,11 +13,20 @@ namespace CetnostZnakuProjekt
             string text = "";
             if (args.Length > 0)
             {
-                text = File.ReadAllText("text.txt");
+                try
+                {
+                    text = File.ReadAllText(args[0]);
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine($"Bohužel jste zadali neexistující soubor, zkontrolujte si prosím název. Zadali jste:  {args[0]}");
+                    Environment.Exit(-1);
+                }
+
             }
 
-            char ch = ' ';
             int celkovyPocet = 0;
+            int pismenZAbecedy = 0;
             List<Pismeno> listP = new List<Pismeno>();
 
             if (args.Length == 0)
@@ -47,14 +56,18 @@ namespace CetnostZnakuProjekt
                     if (result == null)
                     {
                         listP.Add(new Pismeno(znaky[i], 1));
-                        celkovyPocet++;
-                    }
-                    else
-                    {
-                        celkovyPocet++;
-                        listP.Find(x => x.ch == d.ch).pocet++;
+                        pismenZAbecedy++;
                     }
 
+                    else
+                    {
+                        pismenZAbecedy++;
+                        listP.Find(x => x.ch == d.ch).pocet++;
+                    }
+                }
+                if (znaky[i] != ' ')
+                {
+                    celkovyPocet++;
                 }
 
             }
@@ -62,12 +75,12 @@ namespace CetnostZnakuProjekt
             if (listP.Count > 0)
             {
 
-                listP = listP.OrderBy(x => x.pocet).ToList();
+                listP = listP.OrderByDescending(x => x.pocet).ToList();
 
                 foreach (var item in listP)
                 {
 
-                    Console.WriteLine($"Pismeno {item.ch} bylo pouzito {item.pocet} průměrná četnost znaku {(item.pocet / (float)celkovyPocet) * 100} %");
+                    Console.WriteLine($"Pismeno {item.ch} bylo pouzito {item.pocet} průměrná četnost znaků z abecedy {(item.pocet / (float)pismenZAbecedy) * 100} %");
                 }
                 int pocetZnakuVListu = listP.Count;
                 Console.WriteLine("Celkový počet použítých znaků {0}", celkovyPocet);
@@ -77,10 +90,9 @@ namespace CetnostZnakuProjekt
             }
             else
             {
-                Console.WriteLine("Nebyl použit žádný znak z abecedy");
+                Console.WriteLine("Celkový počet použítých znaků {0}", celkovyPocet);
+                Console.WriteLine("Nebyl však použit žádný znak z abecedy (Bez diakritiky)");
             }
-
-
 
             Console.ReadLine();
         }
