@@ -28,7 +28,7 @@ namespace CetnostZnakuProjekt
                     text += Console.ReadLine();
                 }
             }
-            text = text.ToLower();
+            text = text.ToUpper();
             char[] znaky = text.ToArray();
             int kompletPocetZnaku = text.Length;
             if (args.Length == 0) kompletPocetZnaku = text.Length - 1;
@@ -40,7 +40,7 @@ namespace CetnostZnakuProjekt
             {
                 d.ch = znaky[i];
 
-                if ((int)znaky[i] >= 97 && (int)znaky[i] <= 122)
+                if ((int)znaky[i] >= 65 && (int)znaky[i] <= 90)
                 {
                     Pismeno result = listP.Find(x => x.ch == d.ch);
 

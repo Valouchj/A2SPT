@@ -5,3 +5,10 @@ C:\Users\GazZz\Desktop\ProjektA2SPT\CetnostZnakuProjekt\CetnostZnakuProjekt\obj\
 C:\Users\GazZz\Desktop\ProjektA2SPT\CetnostZnakuProjekt\CetnostZnakuProjekt\obj\Debug\CetnostZnakuProjekt.csproj.CoreCompileInputs.cache
 C:\Users\GazZz\Desktop\ProjektA2SPT\CetnostZnakuProjekt\CetnostZnakuProjekt\obj\Debug\CetnostZnakuProjekt.exe
 C:\Users\GazZz\Desktop\ProjektA2SPT\CetnostZnakuProjekt\CetnostZnakuProjekt\obj\Debug\CetnostZnakuProjekt.pdb
+C:\Users\GazZz\Documents\A2SPT\CetnostZnakuProjekt\CetnostZnakuProjekt\bin\Debug\CetnostZnakuProjekt.exe.config
+C:\Users\GazZz\Documents\A2SPT\CetnostZnakuProjekt\CetnostZnakuProjekt\bin\Debug\CetnostZnakuProjekt.exe
+C:\Users\GazZz\Documents\A2SPT\CetnostZnakuProjekt\CetnostZnakuProjekt\bin\Debug\CetnostZnakuProjekt.pdb
+C:\Users\GazZz\Documents\A2SPT\CetnostZnakuProjekt\CetnostZnakuProjekt\obj\Debug\CetnostZnakuProjekt.csprojResolveAssemblyReference.cache
+C:\Users\GazZz\Documents\A2SPT\CetnostZnakuProjekt\CetnostZnakuProjekt\obj\Debug\CetnostZnakuProjekt.csproj.CoreCompileInputs.cache
+C:\Users\GazZz\Documents\A2SPT\CetnostZnakuProjekt\CetnostZnakuProjekt\obj\Debug\CetnostZnakuProjekt.exe
+C:\Users\GazZz\Documents\A2SPT\CetnostZnakuProjekt\CetnostZnakuProjekt\obj\Debug\CetnostZnakuProjekt.pdb
