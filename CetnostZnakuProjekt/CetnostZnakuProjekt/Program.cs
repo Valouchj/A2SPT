@@ -11,7 +11,7 @@ namespace CetnostZnakuProjekt
         {
             int PocetZnakuVAbecede = 26;
             int celkovypocetznaku = 0;
-            string fileName = "text.txt";
+            string fileName = "omegalul.txt";
 
             if (args.Length > 0)
             {
