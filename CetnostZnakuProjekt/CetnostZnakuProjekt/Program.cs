@@ -39,32 +39,37 @@ namespace CetnostZnakuProjekt
             }
             text = text.ToUpper();
             char[] znaky = text.ToArray();
+            /// Deklarace proměnné kompletPocetZnaků a nastavení její velikost na délku textového řetězce včetně mezer
             int kompletPocetZnaku = text.Length;
+            ///Pokud není zadán textový soubor jako vstup, snížíme celkový počet znaků o 1, abychom nepočítali ukončovací znak #
             if (args.Length == 0) kompletPocetZnaku = text.Length - 1;
 
 
-            Pismeno d = new Pismeno(' ');
-
             for (int i = 0; i < kompletPocetZnaku; i++)
             {
-                d.ch = znaky[i];
-
-                if ((int)znaky[i] >= 65 && (int)znaky[i] <= 90)
+                ///kontrola jestli se jedná o písmena od A - Z v DEC tvaru
+                if (znaky[i] >= 'A' && znaky[i] <= 'Z')
                 {
-                    Pismeno result = listP.Find(x => x.ch == d.ch);
+                    ///Hledání, jestli vytvořený list již obsahuje aktuální písmeno
+                    Pismeno result = listP.Find(x => x.ch == znaky[i]);
 
+                    ///Pokud písmeno není obsaženo
                     if (result == null)
                     {
-                        listP.Add(new Pismeno(znaky[i], 1));
+                        ///Do listu se přidá nový objekt s atributy aktuálního znaku a aktuální počet se nastaví na 1
+                        listP.Add(new Pismeno(znaky[i]));
+
                         pismenZAbecedy++;
                     }
 
                     else
                     {
+                        ///Pokud list již aktuální písmeno obsahuje, zvýšíme pouze jeho počet o 1
+                        listP.Find(x => x.ch == znaky[i]).pocet++;
                         pismenZAbecedy++;
-                        listP.Find(x => x.ch == d.ch).pocet++;
                     }
                 }
+                ///Kontrola, jestli znak není mezera, jestli není, zvýší se celkový počet znaků o 1
                 if (znaky[i] != ' ')
                 {
                     celkovyPocet++;
@@ -99,28 +104,27 @@ namespace CetnostZnakuProjekt
 
 
 
+        /// Deklarace třídy Pismeno
         class Pismeno
         {
-            public Pismeno(int pocet)
-            {
-                this.pocet = pocet;
-            }
+            /// <summary>
+            /// Vytvoření konstruktoru pro třídu Pismeno s 1 argumentem
+            /// </summary>
+            /// <param name="ch"> Argument, kterým nastavujeme proměnnou ch na znak, 
+            /// který chceme evidovat/param>
 
             public Pismeno(char ch)
             {
                 this.ch = ch;
             }
-
-            public Pismeno(char ch, int i)
-            {
-                this.ch = ch;
-                pocet = i;
-            }
-
+            /// <summary>
+            /// Property ve které se ukládá znak
+            /// </summary>
             public char ch { get; set; }
-            public int pocet { get; set; }
-
-
+            /// <summary>
+            /// Property, ve které se ukládá kolikrát byl znak použit, při vytvoření nového objektu je automaticky nastaven na 1
+            /// </summary>
+            public int pocet { get; set; } = 1;
         }
 
 
