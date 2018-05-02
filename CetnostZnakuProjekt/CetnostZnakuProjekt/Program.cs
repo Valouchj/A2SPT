@@ -10,28 +10,13 @@ namespace CetnostZnakuProjekt
 
         static void Main(string[] args)
         {
-            int PocetZnakuVAbecede = 26;
-            int celkovypocetznaku = 0;
-            string fileName = "omegalul.txt";
-
+            string text = "";
             if (args.Length > 0)
             {
-                fileName = @"" + args[0];
+                text = File.ReadAllText("text.txt");
             }
-
-
-
-            if (args.Length == 0)
-            {
-                StreamWriter sw = File.CreateText(fileName);
-                sw.Dispose();
-                sw.Close();
-            }
-
-            StreamReader reader = new StreamReader(fileName);
 
             char ch = ' ';
-            string text = "";
             int celkovyPocet = 0;
             List<Pismeno> listP = new List<Pismeno>();
 
@@ -44,63 +29,34 @@ namespace CetnostZnakuProjekt
                 }
             }
             text = text.ToLower();
+            char[] znaky = text.ToArray();
+            int kompletPocetZnaku = text.Length;
+            if (args.Length == 0) kompletPocetZnaku = text.Length - 1;
 
-            int pozice = 0;
-            string temp = null;
-            bool run = true;
+
             Pismeno d = new Pismeno(' ');
-            while (run)
+
+            for (int i = 0; i < kompletPocetZnaku; i++)
             {
+                d.ch = znaky[i];
 
-                if (args.Length > 0 || pozice == 0)
+                if ((int)znaky[i] >= 97 && (int)znaky[i] <= 122)
                 {
+                    Pismeno result = listP.Find(x => x.ch == d.ch);
 
-                    ch = (char)reader.Read();
-                    temp = ch.ToString();
-                    temp = temp.ToLower();
-                    ch = temp[0];
-                }
-                else
-                {
-                    ch = text[pozice];
-                }
-                d.ch = ch;
-
-                Pismeno result = listP.Find(x => x.ch == d.ch);
-
-
-                if (result == null)
-                {
-                    if ((int)ch >= 97 && (int)ch <= 122)
+                    if (result == null)
                     {
-                        listP.Add(new Pismeno(ch, 1));
+                        listP.Add(new Pismeno(znaky[i], 1));
                         celkovyPocet++;
-
+                    }
+                    else
+                    {
+                        celkovyPocet++;
+                        listP.Find(x => x.ch == d.ch).pocet++;
                     }
 
                 }
-                else
-                {
-                    celkovyPocet++;
-                    listP.Find(x => x.ch == d.ch).pocet++;
-                }
 
-
-                if (reader.EndOfStream && args.Length > 0)
-                {
-                    run = false;
-                }
-
-                if (ch == '#' && args.Length == 0)
-                {
-                    run = false;
-                }
-
-                pozice++;
-                if (ch != ' ' && ch != '#')
-                {
-                    celkovypocetznaku++;
-                }
             }
 
             if (listP.Count > 0)
@@ -114,8 +70,8 @@ namespace CetnostZnakuProjekt
                     Console.WriteLine($"Pismeno {item.ch} bylo pouzito {item.pocet} průměrná četnost znaku {(item.pocet / (float)celkovyPocet) * 100} %");
                 }
                 int pocetZnakuVListu = listP.Count;
-                Console.WriteLine("Celkový počet použítých znaků {0}", celkovypocetznaku);
-                Console.WriteLine($"Průměrné využití znaků z abecedy bylo: {pocetZnakuVListu / (float)PocetZnakuVAbecede * 100} %");
+                Console.WriteLine("Celkový počet použítých znaků {0}", celkovyPocet);
+                Console.WriteLine($"Průměrné využití znaků z abecedy bylo: {pocetZnakuVListu / (float)26 * 100} %");
                 Console.WriteLine($"Nejméně použitý znak: {listP[0].ch} s poctem znaku : {listP[0].pocet}");
                 Console.WriteLine($"Nejvíce použitý znak: {listP[pocetZnakuVListu - 1].ch} s poctem znaku: {listP[pocetZnakuVListu - 1].pocet}");
             }
@@ -123,9 +79,8 @@ namespace CetnostZnakuProjekt
             {
                 Console.WriteLine("Nebyl použit žádný znak z abecedy");
             }
-            reader.Dispose();
-            reader.Close();
-            if (args.Length == 0) File.Delete(fileName);
+
+
 
             Console.ReadLine();
         }
